@@ -3,9 +3,9 @@
 import {
   createStackNavigator,
 } from 'react-navigation';
-import HomeScreen from './source/screens/HomeScreen';
-import CardScreen from './source/screens/CardScreen';
-import { Themes } from './source/Themes.js';
+import HomeScreen from './screens/HomeScreen';
+import CardScreen from './screens/CardScreen';
+import { Themes } from './Themes.js';
 
 export let theme = Themes.dark;
 
