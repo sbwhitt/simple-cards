@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
     },
     editWindowTitle: {
         fontSize: 24,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
         paddingTop: 15,
         paddingBottom: 10,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: theme.darkPrimary,
         borderRadius: 10,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
     },
     createButton: {
         backgroundColor: theme.mediumSecondary,

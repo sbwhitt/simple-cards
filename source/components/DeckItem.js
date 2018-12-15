@@ -26,7 +26,7 @@ class DeckItem extends React.PureComponent {
                         <MaterialIcons style={{ paddingRight: 15 }}
                             name='edit'
                             size={28}
-                            color={theme.lightPrimary}
+                            color={theme.textPrimary}
                             onPress={onPressIcon} />
                     </View>
                     <Text style={styles.descriptionText} numberOfLines={1}>{item.desc}</Text>
@@ -45,20 +45,20 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 24,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 15,
         paddingTop: 20,
         paddingBottom: 20,
     },
     descriptionText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 20,
         paddingBottom: 20,
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
     },
     listItem: {

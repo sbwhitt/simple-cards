@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 20,
         paddingBottom: 20,
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
     },
     actionButtonStyle: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     menuText: {
         fontSize: 20,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 20,
     },
 });

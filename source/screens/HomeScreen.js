@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Modal from 'react-native-modal';
+
 import DeckItem from '../components/DeckItem.js';
 import DeckEditWindow from '../components/DeckEditWindow.js';
 import DeckEditMenu from '../components/DeckEditMenu.js';
@@ -23,7 +24,7 @@ export default class HomePage extends Component<Props> {
     static navigationOptions = {
         title: 'simple cards',
         headerStyle: { backgroundColor: theme.mediumPrimary },
-        headerTitleStyle: { color: theme.lightPrimary },
+        headerTitleStyle: { color: theme.textPrimary },
 
     };
     constructor(props) {
@@ -250,13 +251,13 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 20,
         paddingBottom: 20,
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
     },
     actionButtonStyle: {
@@ -275,7 +276,7 @@ const styles = StyleSheet.create({
     },
     menuText: {
         fontSize: 20,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         paddingLeft: 20,
     },
 });

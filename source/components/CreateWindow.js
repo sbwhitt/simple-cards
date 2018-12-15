@@ -49,10 +49,10 @@ class CreateCardWindow extends React.PureComponent {
     }
 
     render() {
-        const item = this.props.item;
+        const { item, title, buttonText } = this.props;
         return (
             <View style={styles.window}>
-                <Text style={styles.editWindowTitle}>{this.props.title}</Text>
+                <Text style={styles.editWindowTitle}>{title}</Text>
                 <View style={{ paddingLeft: 10, paddingRight: 10, }}>
                     <TextInput style={styles.textInput}
                         placeholder='enter card question'
@@ -66,7 +66,7 @@ class CreateCardWindow extends React.PureComponent {
                 <TouchableHighlight
                     style={styles.createButton}
                     onPress={this._onCreate}>
-                    <Text style={styles.buttonText}>{this.props.buttonText}</Text>
+                    <Text style={styles.buttonText}>{buttonText}</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
     },
     editWindowTitle: {
         fontSize: 24,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
         paddingTop: 15,
         paddingBottom: 10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: theme.darkPrimary,
         borderRadius: 10,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
     },
     createButton: {
         backgroundColor: theme.mediumSecondary,

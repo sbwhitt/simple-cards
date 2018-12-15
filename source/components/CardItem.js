@@ -36,7 +36,7 @@ class CardItem extends React.PureComponent {
         const closeIcon = 
             <MaterialIcons style={styles.closeIcon} 
                 name='close'
-                color={theme.lightPrimary}
+                color={theme.textPrimary}
                 size={24}
                 onPress={this.props.onDeletePressed}/>;
 
@@ -44,7 +44,7 @@ class CardItem extends React.PureComponent {
             <TextInput
                 style={styles.questionText}
                 placeholder={this.state.question}
-                placeholderTextColor={theme.lightPrimary}
+                placeholderTextColor={theme.textPrimary}
                 onChange={(text) => {this.setState({ question: text })}} />
             : <Text style={styles.questionText}>{this.state.question}</Text>;
 
@@ -52,7 +52,7 @@ class CardItem extends React.PureComponent {
             <TextInput
                 style={styles.answerText}
                 placeholder={this.state.answer}
-                placeholderTextColor={theme.lightPrimary}
+                placeholderTextColor={theme.textPrimary}
                 onChange={(text) => {this.setState({ answer: text })}} />
             : <Text style={styles.answerText}>{this.state.hideAnswer ? 'tap to reveal answer' : this.state.answer }</Text>;
 
@@ -85,14 +85,14 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 24,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
         paddingBottom: 10,
         paddingTop: 20,
     },
     answerText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
         paddingBottom: 30,
     },

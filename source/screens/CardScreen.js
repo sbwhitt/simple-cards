@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
+    TouchableHighlight,
+    Text,
 } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import ActionButton from 'react-native-action-button';
 import Modal from 'react-native-modal';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import { CreateCardWindow } from '../components/CreateWindow.js';
 import CardItem from '../components/CardItem.js';
 import { Themes } from '../Themes.js';
@@ -23,16 +26,16 @@ export default class CardPage extends Component<Props> {
         const { params = {} } = navigation.state;
         return {
             headerRight: (
-                <MaterialIcons style={{ paddingRight: 10, }}
+                <MaterialIcons style={{ paddingRight: 10, paddingTop: 5, }}
                     name='more-vert'
                     size={28}
-                    color={theme.lightPrimary}
-                    onPress={() => {}}/>
+                    color={theme.textPrimary}
+                    onPress={navigation.getParam('toggleContext')}/>
             ),
             title: params.title,
             headerStyle: { backgroundColor: theme.mediumPrimary },
-            headerTitleStyle: { color: theme.lightPrimary },
-            headerTintColor: theme.lightPrimary,
+            headerTitleStyle: { color: theme.textPrimary },
+            headerTintColor: theme.textPrimary,
         };
     };
 
@@ -43,7 +46,8 @@ export default class CardPage extends Component<Props> {
         const deckIndex = params.index;
         const cards = params.cards;
         this.state = {
-            isCreating: false,
+            createVisible: false,
+            contextVisible: false,
             index: 0,
             decks: decks,
             deckIndex: deckIndex,
@@ -53,16 +57,24 @@ export default class CardPage extends Component<Props> {
         };
     }
 
+    componentDidMount() {
+        this.props.navigation.setParams({ toggleContext: this._toggleContext });
+    }
+
     //called to update the selected deck with any new cards/card positions
     componentWillUnmount() {
         const { params = {} } = this.props.navigation.state;
         params.returnData(params.index, this.state.cards);
     }
 
+    _toggleContext = () => {
+        this.setState({ contextVisible: !this.state.contextVisible });
+    };
+
     //handling card creation
     _createCard = (item) => {
         const { params = {} } = this.props.navigation.state;
-        this.setState({ isCreating: !this.state.isCreating });
+        this.setState({ createVisible: !this.state.createVisible });
         if (item.question !== '' && item.answer !== '') {
             item.index = this.state.cards.length;
             this.setState({
@@ -77,12 +89,12 @@ export default class CardPage extends Component<Props> {
 
     //handling fab press
     _onActionPressed = () => {
-        this.setState({ isCreating: !this.state.isCreating });
+        this.setState({ createVisible: !this.state.createVisible });
     };
 
     //similar to home page, conditionally renders based on card creation
     _renderIfCreating = () => {
-        if (!this.state.isCreating) {
+        if (!this.state.createVisible) {
             return (
                 <ActionButton style={styles.actionButtonStyle}
                     buttonColor={theme.darkSecondary}
@@ -118,16 +130,36 @@ export default class CardPage extends Component<Props> {
     };
 
     //main render function for deckpage
+    //TODO create separate file for context menu modal
     render() {
         const { params = {} } = this.props.navigation.state;
         return (
             <View style={styles.container}>
-                <Modal isVisible={this.state.isCreating}
+                <Modal isVisible={this.state.contextVisible}
+                    animationIn='fadeIn'
+                    animationInTiming={150}
+                    animationOut='fadeOut'
+                    animationOutTiming={150}
+                    backdropOpacity={0.0}
+                    onRequestClose={this._toggleContext}
+                    onBackdropPress={this._toggleContext}>
+                    <View style={styles.contextMenu}>
+                        <TouchableHighlight style={{ paddingTop: 5, paddingBottom: 5, }}
+                            onPress={() => {}}>
+                            <Text style={styles.contextOption}>sort cards alphabetically</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={{ paddingTop: 5, paddingBottom: 5, }}
+                            onPress={() => {}}>
+                            <Text style={styles.contextOption}>shuffle cards</Text>
+                        </TouchableHighlight>
+                    </View>
+                </Modal>
+                <Modal isVisible={this.state.createVisible}
                     animationIn='slideInUp'
                     backdropColor={theme.darkPrimary}
                     backdropOpacity={0.7}
-                    onRequestClose={() => { this.setState({ isCreating: !this.state.isCreating }); }}
-                    onBackdropPress={() => { this.setState({ isCreating: !this.state.isCreating }); }}>
+                    onRequestClose={() => { this.setState({ createVisible: !this.state.createVisible }); }}
+                    onBackdropPress={() => { this.setState({ createVisible: !this.state.createVisible }); }}>
                     <CreateCardWindow item={{ question: '', answer: '', index: null, hideAnswer: true, }}
                         title='create a card'
                         buttonText='create'
@@ -153,14 +185,27 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
     },
     actionButtonStyle: {
-        elevation: 1,
+        elevation: 5,
     },
     buttonText: {
         fontSize: 18,
-        color: theme.lightPrimary,
+        color: theme.textPrimary,
         textAlign: 'center',
+    },
+    contextMenu: {
+        backgroundColor: theme.mediumPrimary,
+        marginBottom: 420,
+        paddingLeft: 5,
+        alignSelf: 'flex-end',
+        elevation: 5,
+    },
+    contextOption: {
+        color: theme.textPrimary,
+        fontSize: 20,
+        paddingRight: 20,
+        paddingLeft: 5,
     },
 });
