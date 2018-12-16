@@ -13,7 +13,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CreateCardWindow } from '../components/CreateWindow.js';
 import CardItem from '../components/CardItem.js';
 import ContextMenu from '../components/ContextMenu.js';
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 
 export let theme = Themes.dark;
 

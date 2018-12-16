@@ -8,7 +8,7 @@ import {
     View,
     TouchableHighlight,
 } from 'react-native';
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 
 export let theme = Themes.dark;
 

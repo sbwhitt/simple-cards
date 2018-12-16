@@ -15,7 +15,7 @@ import DeckItem from '../components/DeckItem.js';
 import DeckEditWindow from '../components/DeckEditWindow.js';
 import DeckEditMenu from '../components/DeckEditMenu.js';
 import { CreateDeckWindow } from '../components/CreateWindow.js';
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 
 export let theme = Themes.dark;
 

@@ -8,7 +8,7 @@ import {
     TouchableHighlight,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 
 export let theme = Themes.dark;
 

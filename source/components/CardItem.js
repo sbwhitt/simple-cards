@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export let theme = Themes.dark;

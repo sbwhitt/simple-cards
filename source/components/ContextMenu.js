@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
-import { Themes } from '../Themes.js';
+import { Themes } from '../themes/Themes.js';
 
 export let theme = Themes.dark;
 
