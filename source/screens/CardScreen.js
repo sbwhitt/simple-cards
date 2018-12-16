@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
-    TouchableHighlight,
-    Text,
 } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import ActionButton from 'react-native-action-button';
@@ -14,6 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { CreateCardWindow } from '../components/CreateWindow.js';
 import CardItem from '../components/CardItem.js';
+import ContextMenu from '../components/ContextMenu.js';
 import { Themes } from '../Themes.js';
 
 export let theme = Themes.dark;
@@ -71,6 +70,24 @@ export default class CardPage extends Component<Props> {
         this.setState({ contextVisible: !this.state.contextVisible });
     };
 
+    _sortCards = () => {
+        const { params = {} } = this.props.navigation.state;
+        var tempArr = this.state.cards.slice();
+        //for (var i = 0; i < tempArr.length; i++) tempArr[i].hideAnswer = true;
+        tempArr.sort((a, b) => (a.question > b.question) ? 1 : ((b.question > a.question) ? -1 : 0));
+        this.setState({ cards: tempArr, contextVisible: !this.state.contextVisible }, 
+            () => { params.returnData(params.index, this.state.cards); });
+    };
+
+    _shuffleCards = () => {
+        const { params = {} } = this.props.navigation.state;
+        var tempArr = this.state.cards.slice();
+        //for (var i = 0; i < tempArr.length; i++) tempArr[i].hideAnswer = true;
+        tempArr.sort((a, b) => (Math.floor(Math.random()*10) > 6) ? 1 : ((Math.floor(Math.random()*10) < 4) ? -1 : 0));
+        this.setState({ cards: tempArr, contextVisible: !this.state.contextVisible }, 
+            () => { params.returnData(params.index, this.state.cards); });
+    };
+
     //handling card creation
     _createCard = (item) => {
         const { params = {} } = this.props.navigation.state;
@@ -119,6 +136,7 @@ export default class CardPage extends Component<Props> {
 
     //render item for draggable flatlist
     _renderItem = ({ item, index, move, moveEnd, isActive }) => {
+        console.log(item);
         return (
             <CardItem
                 item={item}
@@ -130,30 +148,15 @@ export default class CardPage extends Component<Props> {
     };
 
     //main render function for deckpage
-    //TODO create separate file for context menu modal
     render() {
         const { params = {} } = this.props.navigation.state;
         return (
             <View style={styles.container}>
-                <Modal isVisible={this.state.contextVisible}
-                    animationIn='fadeIn'
-                    animationInTiming={150}
-                    animationOut='fadeOut'
-                    animationOutTiming={150}
-                    backdropOpacity={0.0}
-                    onRequestClose={this._toggleContext}
-                    onBackdropPress={this._toggleContext}>
-                    <View style={styles.contextMenu}>
-                        <TouchableHighlight style={{ paddingTop: 5, paddingBottom: 5, }}
-                            onPress={() => {}}>
-                            <Text style={styles.contextOption}>sort cards alphabetically</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style={{ paddingTop: 5, paddingBottom: 5, }}
-                            onPress={() => {}}>
-                            <Text style={styles.contextOption}>shuffle cards</Text>
-                        </TouchableHighlight>
-                    </View>
-                </Modal>
+                <ContextMenu
+                    toggleContext={this._toggleContext}
+                    contextVisible={this.state.contextVisible}
+                    sortCards={this._sortCards}
+                    shuffleCards={this._shuffleCards}/>
                 <Modal isVisible={this.state.createVisible}
                     animationIn='slideInUp'
                     backdropColor={theme.darkPrimary}
@@ -188,24 +191,11 @@ const styles = StyleSheet.create({
         color: theme.textPrimary,
     },
     actionButtonStyle: {
-        elevation: 5,
+        elevation: 10,
     },
     buttonText: {
         fontSize: 18,
         color: theme.textPrimary,
         textAlign: 'center',
-    },
-    contextMenu: {
-        backgroundColor: theme.mediumPrimary,
-        marginBottom: 420,
-        paddingLeft: 5,
-        alignSelf: 'flex-end',
-        elevation: 5,
-    },
-    contextOption: {
-        color: theme.textPrimary,
-        fontSize: 20,
-        paddingRight: 20,
-        paddingLeft: 5,
     },
 });

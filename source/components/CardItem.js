@@ -1,6 +1,6 @@
 'using strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -21,25 +21,27 @@ class CardItem extends React.PureComponent {
         this.state = {
             question: this.props.item.question,
             answer: this.props.item.answer,
-            hideAnswer: true,
+            hideAnswer: this.props.item.hideAnswer,
             isEditing: false,
         };
     }
 
     _onPress = () => {
-        this.setState({ hideAnswer: !this.state.hideAnswer })
+        this.setState({ hideAnswer: !this.state.hideAnswer });
+        console.log(this.props.item);
     }
 
     render() {
-        const { move, moveEnd, } = this.props;
+        const { move, moveEnd, onDeletePressed, } = this.props;
 
         const closeIcon = 
             <MaterialIcons style={styles.closeIcon} 
                 name='close'
                 color={theme.textPrimary}
                 size={24}
-                onPress={this.props.onDeletePressed}/>;
+                onPress={onDeletePressed}/>;
 
+        //isEditing does nothing atm
         const questionField = this.state.isEditing ?
             <TextInput
                 style={styles.questionText}
