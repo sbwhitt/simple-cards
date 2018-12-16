@@ -43,7 +43,7 @@ class ContextMenu extends React.PureComponent {
 const styles = StyleSheet.create({
     contextMenu: {
         backgroundColor: theme.mediumPrimary,
-        marginBottom: 475,
+        marginBottom: 400,
         paddingLeft: 5,
         alignSelf: 'flex-end',
         elevation: 5,

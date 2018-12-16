@@ -22,7 +22,6 @@ class CardItem extends React.PureComponent {
             question: this.props.item.question,
             answer: this.props.item.answer,
             hideAnswer: this.props.item.hideAnswer,
-            isEditing: false,
         };
     }
 
@@ -34,30 +33,6 @@ class CardItem extends React.PureComponent {
     render() {
         const { move, moveEnd, onDeletePressed, } = this.props;
 
-        const closeIcon = 
-            <MaterialIcons style={styles.closeIcon} 
-                name='close'
-                color={theme.textPrimary}
-                size={24}
-                onPress={onDeletePressed}/>;
-
-        //isEditing does nothing atm
-        const questionField = this.state.isEditing ?
-            <TextInput
-                style={styles.questionText}
-                placeholder={this.state.question}
-                placeholderTextColor={theme.textPrimary}
-                onChange={(text) => {this.setState({ question: text })}} />
-            : <Text style={styles.questionText}>{this.state.question}</Text>;
-
-        const answerField = this.state.isEditing ?
-            <TextInput
-                style={styles.answerText}
-                placeholder={this.state.answer}
-                placeholderTextColor={theme.textPrimary}
-                onChange={(text) => {this.setState({ answer: text })}} />
-            : <Text style={styles.answerText}>{this.state.hideAnswer ? 'tap to reveal answer' : this.state.answer }</Text>;
-
         return (
             <TouchableOpacity style={styles.cardItem}
                 onPress={this._onPress}
@@ -65,15 +40,19 @@ class CardItem extends React.PureComponent {
                 onPressOut={moveEnd}>
                 <View style={{ flex: 1, flexDirection: 'row', }}>
                     <View style={{ width: 32, }}>
-                        {closeIcon}
+                        <MaterialIcons style={styles.closeIcon} 
+                            name='close'
+                            color={theme.textPrimary}
+                            size={24}
+                            onPress={onDeletePressed}/>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
-                        {questionField}
+                        <Text style={styles.questionText}>{this.state.question}</Text>
                     </View>
                     <View style={{ width: 32, }}>
                     </View>
                 </View>
-                {answerField}
+                <Text style={styles.answerText}>{this.state.hideAnswer ? 'tap to reveal answer' : this.state.answer }</Text>
             </TouchableOpacity>
         );
     }
@@ -102,11 +81,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingLeft: 10,
         textAlign: 'right',
-    },
-    editIcon: {
-        paddingTop: 10,
-        paddingRight: 10,
-        textAlign: 'left',
     },
 });
 
