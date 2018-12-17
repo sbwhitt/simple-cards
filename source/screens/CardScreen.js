@@ -15,7 +15,7 @@ import CardItem from '../components/CardItem.js';
 import ContextMenu from '../components/ContextMenu.js';
 import { Themes } from '../themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 //main page class, cards not saved until returned to homepage,card indexes very wrong since index isnt being saved
 type Props = {};

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Themes } from '../themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 //title, onCreate, item
 class CreateDeckWindow extends React.PureComponent {

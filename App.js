@@ -8,7 +8,7 @@ import HomeScreen from './source/screens/HomeScreen';
 import CardScreen from './source/screens/CardScreen';
 import { Themes } from './source/themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 const App = createStackNavigator(
   {

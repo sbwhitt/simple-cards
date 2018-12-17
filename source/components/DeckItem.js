@@ -10,7 +10,7 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Themes } from '../themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 //custom item to render decks using flatlist
 //props are item and onPressItem

@@ -17,7 +17,7 @@ import DeckEditMenu from '../components/DeckEditMenu.js';
 import { CreateDeckWindow } from '../components/CreateWindow.js';
 import { Themes } from '../themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 type Props = {};
 export default class HomePage extends Component<Props> {

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Themes } from '../themes/Themes.js';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 class DeckEditMenu extends React.PureComponent {
 

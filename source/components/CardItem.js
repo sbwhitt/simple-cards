@@ -11,7 +11,7 @@ import {
 import { Themes } from '../themes/Themes.js';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export let theme = Themes.dark;
+let theme = Themes.dark;
 
 //custom card item class that is rendered in draggable flatlist
 //props are item, move, moveEnd
