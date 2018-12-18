@@ -33,7 +33,6 @@ export default class HomePage extends Component<Props> {
             isCreating: false,
             isEditing: false,
             editMenu: false,
-            switched: false,
             decks: null,
             index: null,
             title: '',
@@ -98,9 +97,9 @@ export default class HomePage extends Component<Props> {
 
     //function used in child screens to update decks in home screen
     returnData = (index, cards) => {
-        const tempArr = this.state.decks.slice();
-        if (tempArr.length !== 0) tempArr[index].cards = cards;
-        this.setState({ decks: tempArr }, () => { this.storeItem('decks', this.state.decks); });
+        const decksCopy = this.state.decks.slice();
+        if (decksCopy.length !== 0) decksCopy[index].cards = cards;
+        this.setState({ decks: decksCopy }, () => { this.storeItem('decks', this.state.decks); });
     };
 
     //function that handles the creation of new decks
@@ -123,9 +122,9 @@ export default class HomePage extends Component<Props> {
     //called when confirm button is pressed on edit window screen
     _editDeck = (item) => {
         const index = item.index;
-        const tempArr = this.state.decks.slice();
-        tempArr[index] = item;
-        this.setState({ decks: tempArr }, () => { this.storeItem('decks', this.state.decks); });
+        const decksCopy = this.state.decks.slice();
+        decksCopy[index] = item;
+        this.setState({ decks: decksCopy }, () => { this.storeItem('decks', this.state.decks); });
         this.setState({ isEditing: !this.state.isEditing }, () => { this.setState({ editMenu: !this.state.editMenu }) });
     };
 
@@ -165,13 +164,13 @@ export default class HomePage extends Component<Props> {
     //deleting selected deck by splicing the deck's index
     _onDeletePressed = (item) => {
         const index = item.index;
-        var tempArr = this.state.decks.slice();
-        tempArr.splice(index, 1);
-        for (i = 0; i < tempArr.length; i++) {
-            tempArr[i].index = i;
+        var decksCopy = this.state.decks.slice();
+        decksCopy.splice(index, 1);
+        for (i = 0; i < decksCopy.length; i++) {
+            decksCopy[i].index = i;
         }
-        this.setState({ decks: tempArr }, () => { this.storeItem('decks', this.state.decks); });
-        this.setState({ index: tempArr.length }, () => { this.storeItem('index', this.state.index); });
+        this.setState({ decks: decksCopy }, () => { this.storeItem('decks', this.state.decks); });
+        this.setState({ index: decksCopy.length }, () => { this.storeItem('index', this.state.index); });
         this.setState({ editMenu: false });
     }
 

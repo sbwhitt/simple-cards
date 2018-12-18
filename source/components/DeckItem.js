@@ -64,8 +64,7 @@ const styles = StyleSheet.create({
     listItem: {
         backgroundColor: theme.mediumSecondary,
         borderColor: theme.darkPrimary,
-        borderWidth: 1,
-        borderRadius: 25,
+        borderWidth: 2,
     },
 });
 

@@ -72,19 +72,20 @@ export default class CardPage extends Component<Props> {
 
     _sortCards = () => {
         const { params = {} } = this.props.navigation.state;
-        var tempArr = this.state.cards.slice();
-        //for (var i = 0; i < tempArr.length; i++) tempArr[i].hideAnswer = true;
-        tempArr.sort((a, b) => (a.question > b.question) ? 1 : ((b.question > a.question) ? -1 : 0));
-        this.setState({ cards: tempArr, contextVisible: !this.state.contextVisible }, 
+        var cardsCopy = this.state.cards.slice();
+        //for (var i = 0; i < cardsCopy.length; i++) cardsCopy[i].hideAnswer = true;
+        cardsCopy.sort((a, b) => (a.question.toLowerCase() > b.question.toLowerCase()) ? 1 
+            : ((b.question.toLowerCase() > a.question.toLowerCase()) ? -1 : 0));
+        this.setState({ cards: cardsCopy, contextVisible: !this.state.contextVisible }, 
             () => { params.returnData(params.index, this.state.cards); });
     };
 
     _shuffleCards = () => {
         const { params = {} } = this.props.navigation.state;
-        var tempArr = this.state.cards.slice();
-        //for (var i = 0; i < tempArr.length; i++) tempArr[i].hideAnswer = true;
-        tempArr.sort((a, b) => (Math.floor(Math.random()*10) > 6) ? 1 : ((Math.floor(Math.random()*10) < 4) ? -1 : 0));
-        this.setState({ cards: tempArr, contextVisible: !this.state.contextVisible }, 
+        var cardsCopy = this.state.cards.slice();
+        //for (var i = 0; i < cardsCopy.length; i++) cardsCopy[i].hideAnswer = true;
+        cardsCopy.sort((a, b) => (Math.floor(Math.random()*10) > 6) ? 1 : ((Math.floor(Math.random()*10) < 4) ? -1 : 0));
+        this.setState({ cards: cardsCopy, contextVisible: !this.state.contextVisible }, 
             () => { params.returnData(params.index, this.state.cards); });
     };
 
@@ -126,9 +127,9 @@ export default class CardPage extends Component<Props> {
     //deleting card at index
     _deleteCard = (index) => {
         const { params = {} } = this.props.navigation.state;
-        var tempArr = this.state.cards.slice();
-        tempArr.splice(index, 1);
-        this.setState({ cards: tempArr }, () => { params.returnData(params.index, this.state.cards); });
+        var cardsCopy = this.state.cards.slice();
+        cardsCopy.splice(index, 1);
+        this.setState({ cards: cardsCopy }, () => { params.returnData(params.index, this.state.cards); });
     };
 
     //producing unique keys for card items
